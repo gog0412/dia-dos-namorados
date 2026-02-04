@@ -1,80 +1,131 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Queres ser o meu São Valentim?</title>
+  <meta charset="UTF-8" />
+  <title>San Valentín ❤️</title>
   <style>
     body {
-      background: #ffd6e8;
-      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
     }
 
     .card {
-      background: #fff;
-      padding: 40px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
       border-radius: 20px;
+      padding: 40px;
       text-align: center;
+      width: 90%;
+      max-width: 600px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      width: 320px;
-      position: relative;
     }
 
     h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    .question {
+      background: #fff3;
+      padding: 15px;
+      border-radius: 15px;
       margin-bottom: 30px;
+      font-size: 1.2rem;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
     }
 
     button {
-      padding: 12px 25px;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 12px;
       border: none;
-      border-radius: 25px;
-      font-size: 16px;
       cursor: pointer;
-      margin: 10px;
+      transition: 0.2s;
     }
 
-    #yes {
-      background: #ff4d6d;
+    #yesBtn {
+      background: black;
       color: white;
+      margin-right: 20px;
     }
 
-    #no {
-      background: #ddd;
+    #noBtn {
+      background: #ffe5d9;
       position: absolute;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .love {
+      margin-top: 25px;
+      font-size: 1.1rem;
+      display: none;
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h1>Queres ser o meu São Valentim? 💖</h1>
-  <button id="yes" onclick="yes()">Sim 💕</button>
-  <button id="no">Não</button>
-</div>
+  <div class="card">
+    <h1>Hey Maria 💌</h1>
+    <p>Alex tiene una pregunta...</p>
 
-<script>
-  const noBtn = document.getElementById("no");
+    <div class="question">
+      ¿Quieres ser mi San Valentín? No acepto no por respuesta...
+    </div>
 
-  noBtn.addEventListener("mouseover", () => {
-    const card = document.querySelector(".card");
-    const maxX = card.clientWidth - noBtn.offsetWidth;
-    const maxY = card.clientHeight - noBtn.offsetHeight;
+    <div class="buttons">
+      <button id="yesBtn">Sí ❤️</button>
+      <button id="noBtn">No</button>
+    </div>
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    <div class="message">El botón No está nervioso.</div>
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  });
+    <div class="love" id="loveMsg">SABÍA QUE DIRÍAS QUE SÍ 😍💖</div>
+  </div>
 
-  function yes() {
-    window.location.href = "yes.html";
-  }
-</script>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMsg = document.getElementById("loveMsg");
+
+    function moveButton() {
+      const card = document.querySelector(".buttons");
+      const maxX = card.clientWidth - noBtn.clientWidth;
+      const maxY = card.clientHeight - noBtn.clientHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("click", moveButton);
+
+    yesBtn.addEventListener("click", () => {
+      loveMsg.style.display = "block";
+      yesBtn.innerText = "Sabía que sí ❤️";
+    });
+  </script>
 
 </body>
 </html>
