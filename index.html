@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>San Valentín ❤️</title>
   <style>
+    /* --- Layout da página --- */
     body {
       margin: 0;
       height: 100vh;
@@ -14,7 +15,9 @@
       align-items: center;
     }
 
+    /* --- Caixa principal --- */
     .card {
+      position: relative;
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(10px);
       border-radius: 20px;
@@ -23,16 +26,28 @@
       width: 90%;
       max-width: 600px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      animation: aparecer 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
-    p {
-      font-size: 1.2rem;
-      margin: 20px 0;
+    /* --- Textos --- */
+    h1 { margin: 0; font-size: 2.5rem; }
+    p { font-size: 1.2rem; margin: 20px 0; }
+
+    /* --- Texto intro e pergunta --- */
+    .hidden { opacity: 0; transform: translateY(10px); }
+    .show { animation: fadeUp 0.6s ease forwards; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .question {
@@ -43,11 +58,20 @@
       font-size: 1.2rem;
     }
 
-    .buttons {
-      position: relative;
-      height: 120px;
+    .cursor {
+      display: inline-block;
+      margin-left: 3px;
+      animation: blink 1s infinite;
+      color: #ff4d6d;
     }
 
+    @keyframes blink {
+      0%,50%,100% { opacity:1; }
+      25%,75% { opacity:0; }
+    }
+
+    /* --- Botões --- */
+    .buttons { position: relative; height: 120px; }
     button {
       padding: 15px 30px;
       font-size: 1.2rem;
@@ -56,13 +80,11 @@
       cursor: pointer;
       transition: 0.2s;
     }
-
     #yesBtn {
       background: black;
       color: white;
       margin-right: 20px;
     }
-
     #noBtn {
       background: #ffe5d9;
       position: absolute;
@@ -74,49 +96,21 @@
       opacity: 0.8;
     }
 
-
-.card {
-  animation: aparecer 0.8s ease forwards;
-  opacity: 0;
-  transform: translateY(30px) scale(0.95);
-}
-
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.card::after {
-  content: "";
-  position: relative;
-  inset: 0;
-  border-radius: 20px;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
-  opacity: 0;
-  animation: brilho 1.2s ease forwards;
-}
-
-@keyframes brilho {
-  to { opacity: 1; }
-}
-
-    
   </style>
 </head>
 <body>
 
   <div class="card">
     <h1>Hey Maria 💌</h1>
-    <p>Alex tiene una pregunta...</p>
 
-    <div class="question">
-      ¿Quieres ser mi San Valentín? No acepto no por respuesta...
+    <p id="introText" class="hidden">Alex tiene una pregunta...</p>
+
+    <div class="question hidden" id="questionBox">
+      <span id="typingText"></span><span class="cursor">|</span>
     </div>
 
     <div class="buttons">
-      <button id="yesBtn" onclick="window.location.href='yes.html'">Sí ❤️</button>
+      <button id="yesBtn" onclick="window.location.href='sim.html'">Sí ❤️</button>
       <button id="noBtn">No</button>
     </div>
 
@@ -124,22 +118,45 @@
   </div>
 
   <script>
+    // --- Botão No a fugir ---
     const noBtn = document.getElementById("noBtn");
-
     function moveButton() {
       const container = document.querySelector(".buttons");
       const maxX = container.clientWidth - noBtn.clientWidth;
       const maxY = container.clientHeight - noBtn.clientHeight;
-
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
-
       noBtn.style.left = randomX + "px";
       noBtn.style.top = randomY + "px";
     }
-
     noBtn.addEventListener("mouseover", moveButton);
     noBtn.addEventListener("click", moveButton);
+
+    // --- Efeito de escrever texto ---
+    const intro = document.getElementById("introText");
+    const questionBox = document.getElementById("questionBox");
+    const typingElement = document.getElementById("typingText");
+    const text = "¿Quieres ser mi San Valentín? No acepto no por respuesta...";
+    let index = 0;
+
+    function typeEffect() {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 40);
+      }
+    }
+
+    window.addEventListener("load", () => {
+      // Mostrar introdução
+      setTimeout(() => { intro.classList.add("show"); }, 300);
+
+      // Mostrar pergunta e iniciar escrita
+      setTimeout(() => {
+        questionBox.classList.add("show");
+        typeEffect();
+      }, 1800);
+    });
   </script>
 
 </body>
