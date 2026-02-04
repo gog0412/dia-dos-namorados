@@ -73,12 +73,6 @@
       font-size: 1rem;
       opacity: 0.8;
     }
-
-    .love {
-      margin-top: 25px;
-      font-size: 1.1rem;
-      display: none;
-    }
   </style>
 </head>
 <body>
@@ -92,24 +86,20 @@
     </div>
 
     <div class="buttons">
-      <button id="yesBtn">Sí ❤️</button>
+      <button id="yesBtn" onclick="window.location.href='yes.html'">Sí ❤️</button>
       <button id="noBtn">No</button>
     </div>
 
     <div class="message">El botón No está nervioso.</div>
-
-    <div class="love" id="loveMsg">SABÍA QUE DIRÍAS QUE SÍ 😍💖</div>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const loveMsg = document.getElementById("loveMsg");
 
     function moveButton() {
-      const card = document.querySelector(".buttons");
-      const maxX = card.clientWidth - noBtn.clientWidth;
-      const maxY = card.clientHeight - noBtn.clientHeight;
+      const container = document.querySelector(".buttons");
+      const maxX = container.clientWidth - noBtn.clientWidth;
+      const maxY = container.clientHeight - noBtn.clientHeight;
 
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
@@ -120,11 +110,6 @@
 
     noBtn.addEventListener("mouseover", moveButton);
     noBtn.addEventListener("click", moveButton);
-
-    yesBtn.addEventListener("click", () => {
-      loveMsg.style.display = "block";
-      yesBtn.innerText = "Sabía que sí ❤️";
-    });
   </script>
 
 </body>
