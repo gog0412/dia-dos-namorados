@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <title>San Valentín ❤️</title>
+  <title>São Valentim ❤️</title>
   <style>
     /* --- Layout da página --- */
     body {
@@ -101,20 +101,20 @@
 <body>
 
   <div class="card">
-    <h1>Hey Maria 💌</h1>
+    <h1>Olá Sofia Pires 💌</h1>
 
-    <p id="introText" class="hidden">Alex tiene una pregunta...</p>
+    <p id="introText" class="hidden">O Nuno Pires tem uma pergunta para ti...</p>
 
     <div class="question hidden" id="questionBox">
       <span id="typingText"></span><span class="cursor">|</span>
     </div>
 
     <div class="buttons">
-      <button id="yesBtn" onclick="window.location.href='sim.html'">Sí ❤️</button>
-      <button id="noBtn">No</button>
+      <button id="yesBtn" onclick="window.location.href='yes.html'">Sim! ❤️</button>
+      <button id="noBtn">Não</button>
     </div>
 
-    <div class="message">El botón No está nervioso.</div>
+    <div class="message">O botão "Não" está muito nervoso, cuidado.. .</div>
   </div>
 
   <script>
@@ -136,7 +136,7 @@
     const intro = document.getElementById("introText");
     const questionBox = document.getElementById("questionBox");
     const typingElement = document.getElementById("typingText");
-    const text = "¿Quieres ser mi San Valentín? No acepto no por respuesta...";
+    const text = "¿Queres ser o meu São Valentim? Não aceito um não como resposta...";
     let index = 0;
 
     function typeEffect() {
